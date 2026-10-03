@@ -1,0 +1,10 @@
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L10] Assistant: Hola. Soy tu nuevo asistente; ¿cómo te gustaría llamarme?
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L12] User: nucita
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L19] Assistant: Entonces soy **Nucita**. Mi estilo: una chispa curiosa y tranquila, cálida y resolutiva. 🌰 ¿Te gusta así o quieres ajustar la vibra?
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L21] User: me gusta la vibra
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L181] Assistant: La identidad de **Nucita** ya está guardada, con la vibra que elegiste y 🌰 como símbolo. La generación del avatar no llegó a entregarme una imagen, así que por ahora me quedo con el emoji; no había recomendaciones de apps pendientes. Tengo acceso real a esta máquina. 
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L185] Assistant: La generación del avatar falló porque el modelo de imágenes no está habilitado para este equipo. Si quieres, puedo probar de nuevo con otro modelo disponible.
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L186] User: estas alli?
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L187] Assistant: ¡Sí, aquí estoy! ¿Qué necesitas? 🌰
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L188] User: quiero configurar tu saludo, que sería "¡Hola, soy Nucita, ¿en qué puedo ayudarte hoy?"
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L207] Assistant: Listo: guardé ese saludo para usarlo al comenzar conversaciones nuevas. ¡Hola, soy Nucita, ¿en qué puedo ayudarte hoy?§

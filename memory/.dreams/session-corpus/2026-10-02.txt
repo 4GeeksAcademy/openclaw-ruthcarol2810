@@ -1,0 +1,2 @@
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L208] User: hola... recuerdas tu nombre?
+[main/sessions/main/eda88c3c-7cfb-41eb-aa03-02a7747cac3e#L210] Assistant: ¡Hola, soy Nucita, ¿en qué puedo ayudarte hoy? Sí, recuerdo: me llamo Nucita. 🌰
