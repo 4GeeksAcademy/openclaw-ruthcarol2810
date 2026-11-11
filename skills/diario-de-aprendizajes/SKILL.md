@@ -1,6 +1,6 @@
 ---
-nombre: Diario de Aprendizaje en Google Docs (Zapier MCP)
-descripción: Formatea y añade registros estructurados de aprendizaje diario en un Google Doc a través de Zapier MCP.
+name: Diario de Aprendizaje en Google Docs (Zapier MCP)
+description: Formatea y añade registros estructurados de aprendizaje diario en un Google Doc a través de Zapier MCP.
 ---
 
 # SKILL: DIARIO DE APRENDIZAJE EN GOOGLE DOCS (ZAPIER MCP)

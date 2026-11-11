@@ -5,10 +5,9 @@ Este documento define las reglas de diseño, estructura y normalización de dato
 ---
 
 ## 1. NORMALIZACIÓN DE DATOS Y FECHAS
-* **Fecha de Referencia Histórica:** La fecha actual del sistema es **2026-11-09** (Lunes).
-* **Cálculo de Fechas Relativas:** Transforma cualquier expresión temporal ambigua o relativa a su fecha exacta en formato `AAAA-MM-DD`.
-  * *Ejemplo:* "Este viernes" -> `2026-11-13`.
-  * *Ejemplo:* "El lunes de la próxima semana" -> `2026-11-16`.
+* **Fecha de referencia:** Al procesar una minuta, consulta la fecha vigente del sistema y úsala como referencia para resolver expresiones temporales relativas. Las fechas incluidas en los ejemplos de este archivo —como `2026-11-09`— son ilustrativas; no son una fecha actual fija.
+* **Cálculo de fechas relativas:** Convierte expresiones temporales relativas a fechas exactas en formato `AAAA-MM-DD`, usando como base la fecha vigente. Si el chat confirma otro punto de referencia para una frase (por ejemplo, “el viernes después de la reunión del 9 de noviembre”), usa ese punto de referencia explícito. Si la expresión sigue siendo ambigua, valida el contexto de la reunión y pide aclaración antes de agendar.
+  * *Ejemplos ilustrativos, suponiendo como fecha de referencia el lunes `2026-11-09`:* "Este viernes" -> `2026-11-13`; "El lunes de la próxima semana" -> `2026-11-16`. En uso real, vuelve a calcular con la fecha vigente.
 * **Nombres Propios:** Capitaliza siempre la primera letra de los nombres de los participantes y responsables (ej. *Luis Morales*, nunca *luis morales* o *luis*).
 
 ---
@@ -60,6 +59,8 @@ Para evitar errores de parseo con la API de Telegram y garantizar una lectura r�
 ---
 
 ## 4. EJEMPLO DE TRANSFORMACIÓN (CASO DE ÉXITO)
+
+> **Ejemplo ilustrativo:** las fechas `2026-11-09`, `2026-11-13` y `2026-11-16` de esta sección muestran cómo se resolvería el caso con fecha de referencia lunes 9 de noviembre de 2026. No son valores fijos ni deben usarse como fechas actuales en otras minutas.
 
 ### ENTRADA DESDE TELEGRAM:
 > *Carlos: "Buenas, iniciamos la reunión. Está María y también ingresó Luis. Hay que definir el logo. Luis dice que lo puede tener listo para este viernes. María, ¿puedes armar el presupuesto para el lunes 16 de noviembre?"*

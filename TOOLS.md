@@ -1,19 +1,19 @@
 # OPENCLAW ENVIRONMENT TOOLS & INTEGRATIONS
 
-Este documento detalla la infraestructura de herramientas (`Tools`), el Protocolo de Contexto de Modelo (MCP) y los canales de comunicación configurados en el entorno de producción de **OpenClaw** alojado en la VPS exclusiva.
+Este documento resume la infraestructura de herramientas, las integraciones MCP y los canales de interacción del entorno OpenClaw alojado en una VPS. Distingue los datos comprobados de las recomendaciones operativas; no contiene credenciales.
 
 ---
 
 ## 🏗️ RESUMEN DE LA ARQUITECTURA
 
-OpenClaw opera en una arquitectura desacoplada donde el núcleo del agente se ejecuta en una VPS dedicada, interactuando con servicios externos a través de MCP (Model Context Protocol), webhooks binarios y una interfaz de terminal local (TUI).
+OpenClaw Gateway se ejecuta en una VPS. Ruth se conecta a la VPS por SSH y desde allí puede ejecutar OpenClaw TUI. Las integraciones de Google están disponibles a través de Zapier MCP.
 
 ```mermaid
 graph TD
-    A[OpenClaw Core VPS] -->|TUI| B[Terminal Local / SSH]
+    A[OpenClaw Gateway en VPS] -->|SSH y TUI| B[Terminal de administración]
     A -->|Telegram Bot API| C[Telegram Channel]
     A -->|MCP Client| D[Zapier MCP Server]
-    D -->|OAuth / API| E[Cuenta Dedicada Google]
+    D -->|Autorización de Zapier| E[Cuenta Google dedicada al entorno]
     E --> Gmail
     E --> Drive
     E --> Docs
@@ -25,15 +25,14 @@ graph TD
 ## 🔌 SERVIDORES MCP (MODEL CONTEXT PROTOCOL)
 
 ### 1. ZAPIER MCP SERVER
-Para evitar la sobrecarga de gestionar múltiples credenciales OAuth individuales, se utiliza un bridge centralizado a través de Zapier MCP conectado a una **cuenta de Google dedicada**.
+Zapier MCP conecta las acciones de Google autorizadas para este entorno con una **cuenta de Google creada exclusivamente para el agente OpenClaw**, según confirmó Ruth. La autorización se gestiona mediante la conexión de Zapier MCP; no se deben documentar ni copiar credenciales aquí.
 
-*   **Estado:** `CONECTADO`
-*   **Autenticación:** API Key de Zapier / OAuth corporativo.
-*   **Servicios Disponibles:**
-    *   **Google Drive:** Creación, lectura, actualización y listado de archivos o carpetas de proyectos.
-    *   **Google Docs:** Generación automática de reportes, minutas de reuniones y lectura de plantillas.
-    *   **Gmail:** Monitoreo de bandejas de entrada, filtrado de correos críticos, envío de notificaciones y automatización de respuestas.
-    *   **Google Calendar:** Agendamiento de reuniones, verificación de disponibilidad del equipo y alertas de eventos.
+*   **Estado:** conectado; verificado consultando las conexiones y acciones habilitadas mediante Zapier MCP.
+*   **Autenticación:** conexión autorizada de Zapier MCP. No se ha verificado una API key de Zapier configurada como variable de entorno ni que la autenticación sea corporativa.
+*   **Apps conectadas:** Gmail, Google Drive, Google Docs y Google Calendar. Sus acciones disponibles pueden consultarse mediante Zapier MCP; el acceso concreto depende de la acción habilitada y de los permisos de la conexión.
+    *   **Google Drive:** Se verificó una búsqueda de solo lectura del documento “Plan de Estudio OpenClaw” en la raíz de Drive.
+    *   **Gmail:** El envío de correos externos requiere confirmación explícita de Ruth.
+    *   **Google Calendar:** La modificación de eventos existentes requiere confirmación explícita de Ruth.
 
 ---
 
@@ -43,45 +42,28 @@ Para evitar la sobrecarga de gestionar múltiples credenciales OAuth individuale
 Canal bidireccional para la interacción remota con el agente en tiempo real.
 
 *   **Estado:** `CONEXIÓN VERIFICADA`
-*   **Capacidades:**
-    *   Recepción de comandos y consultas en lenguaje natural.
-    *   Envío de alertas proactivas ante eventos del sistema o notificaciones de Gmail/Calendar.
-    *   Soporte para carga y descarga de archivos procesados (PDFs, imágenes, etc.).
+*   **Capacidad comprobada:** intercambio de consultas y respuestas con el agente en esta conversación.
+*   No se documentan alertas proactivas ni transferencias de archivos como capacidades configuradas, porque no se han verificado en este entorno.
 
 ### 2. OPENCLAW TUI (TEXT USER INTERFACE)
 Interfaz de usuario basada en texto para administración local y debugging.
 
-*   **Estado:** `ACTIVO`
-*   **Uso:** Acceso directo desde la terminal de la VPS vía SSH.
+*   **Acceso:** Ruth confirma que se conecta a la VPS por SSH y desde allí puede ejecutar OpenClaw TUI.
+*   **Disponibilidad del proceso TUI:** no comprobada en esta revisión.
 *   **Funciones:**
-    *   Monitoreo en tiempo real del flujo de pensamiento del agente (`Agent Thoughts`).
-    *   Inspección de llamadas a herramientas (Logs de herramientas de Zapier y Telegram).
-    *   Control manual del ciclo de vida del agente.
+    *   Interacción y administración del agente desde la terminal.
+    *   Cuando estén disponibles, consulta del estado del Gateway, registros y llamadas a herramientas. No se describe como acceso a pensamientos internos del agente.
 
 ---
 
-## 🛠️ CONFIGURACIÓN DEL ENTORNO (VARIABLES DE ENTORNO CLAVE)
+## 🛠️ VALIDACIÓN DE CONFIGURACIÓN Y CREDENCIALES
 
-Asegúrate de que el archivo `.env` en la raíz de la VPS contenga las siguientes directrices activas para que estas herramientas funcionen:
-
-```env
-# --- OPENCLAW CORE ---
-OPENCLAW_ENV=production
-OPENCLAW_TUI_ENABLED=true
-
-# --- TELEGRAM CONFIG ---
-TELEGRAM_BOT_TOKEN=out_of_workspace_for_security
-TELEGRAM_ALLOWED_CHAT_IDS=[123456789example,987654321example]
-
-# --- MCP ZAPIER / GOOGLE CONFIG ---
-ZAPIER_MCP_API_KEY=out_of_workspace_for_security
-GOOGLE_DEDICATED_ACCOUNT=ruthcarol2810.academy@gmail.com
-```
+No se mantiene aquí una lista de variables `.env` ni valores de configuración sensibles. Para diagnosticar una integración, valida su estado mediante OpenClaw/Zapier y los mecanismos de autenticación configurados. No pegues ni guardes en este documento tokens, claves, secretos, IDs privados o contenidos de archivos de entorno. La configuración local identifica el servidor Zapier MCP; los detalles de autorización se mantienen fuera de este documento.
 
 ---
 
-## 🛡️ SEGURIDAD Y BUENAS PRÁCTICAS EN LA VPP
+## 🛡️ SEGURIDAD Y BUENAS PRÁCTICAS EN LA VPS
 
-1. **Aislamiento de Procesos:** OpenClaw y el TUI se ejecutan bajo un usuario del sistema sin privilegios de root (`openclaw-user`).
-2. **Rotación de Credenciales:** Los tokens de Telegram y las llaves de Zapier MCP deben ser rotados cada 90 días.
-3. **Persistencia:** El agente está configurado como un servicio de sistema (`systemd`) para garantizar su reinicio automático si la TUI o el proceso principal se interrumpen.
+1. **Privilegios:** En la comprobación del 11 de noviembre de 2026, el proceso Gateway observado se ejecutaba como `root`. No se debe afirmar que corre bajo un usuario sin privilegios. Se recomienda evaluar con el operador una migración a un usuario de servicio dedicado, considerando permisos y configuración antes de cualquier cambio.
+2. **Credenciales:** Gestiona y renueva credenciales según el mecanismo de autenticación, las políticas del proveedor y su expiración. No se fija una rotación automática cada 90 días sin una política que lo respalde. Si una credencial se expone, revócala o rótala de inmediato mediante el proveedor.
+3. **Persistencia y reinicio:** No se confirmó que el Gateway esté registrado como un servicio systemd activo. Verifica el mecanismo de supervisión y recuperación en el host antes de documentar o modificar políticas de reinicio.
