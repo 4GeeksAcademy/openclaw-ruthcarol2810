@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "zapier": {
+      "baseUrl": "https://mcp.zapier.com/api/v1/connect",
+      "clientName": "openclaw"
+    }
+  }
+}
