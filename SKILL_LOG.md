@@ -1,5 +1,14 @@
 # Registro de skills — 4Geeks Academy
 
+## Skill — Interpretación simbólica de sueños
+
+- **Alcance actualizado:** lectura creativa y lúdica, no diagnóstica ni universal, a partir del relato; los diccionarios web se usan solo como inspiración atribuida. No se transmite a las webs el sueño ni datos identificables: únicamente términos simbólicos breves.
+- **Fuentes verificadas el 2026-11-20:** la búsqueda real de `snake` y `water` obtuvo extractos (HTTP 200) en Dream Bible y AuntyFlo. El dominio proporcionado de Dream Book (`dreambook.es`) no resolvió por DNS desde este entorno; se reporta no disponible y no se sustituyó por otro portal sin autorización.
+- **Rutas y referencias:** se alinearon los comandos y referencias con `skills/interpretacion-de-suenos-simbolica/`; se añadió `references/scripts.md`, se ajustaron las guías de privacidad/consentimiento y se quitó la antigua guía de implementación que mencionaba rutas, permisos y `tool_deck` desactualizados. No se hicieron cambios de configuración global.
+- **Diario y privacidad:** el guardado exige consentimiento explícito y limita el registro a título breve, símbolos, tipo y fecha local; diario privado fuera del workspace. Las recurrencias cuentan símbolos una vez por entrada propia/parcial, excluyen relatos de terceros y solo se consultan cuando Ruth lo pide o autoriza. La caché también queda fuera de la skill y no forma parte del diario.
+- **Pruebas/validación:** 9 pruebas unitarias pasan, incluyendo extracción por encabezado, manejo de caché vacía/negativa, consentimiento, permisos privados y conteo entre entradas distintas. Compilación de fuentes, enlaces Markdown locales, `quick_validate.py` y `git diff --check` pasaron. Se retiraron la caché de prueba con datos incompletos y los `__pycache__` generados; no se guardó ningún sueño.
+- **Archivos:** `skills/interpretacion-de-suenos-simbolica/SKILL.md`, `SKILL_DESIGN.md`, `references/portales.md`, `references/registro.md`, `references/scripts.md`, `scripts/buscar_simbolos.py`, `scripts/registro.py` y `tests/test_dream_tools.py`. <!-- project: github.com/4GeeksAcademy/openclaw-ruthcarol2810 -->
+
 ## Skill 1 — Autenticación
 
 - **Prompt inicial en lenguaje natural:** «La primera skill es para autenticarnos en la API de estudiantes de 4Geeks Academy, dónde estoy haciendo el Bootcamp de AI Engineering».
